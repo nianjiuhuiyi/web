@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>伪元素</title>
+    <style>
+        /* 一、对首字母的处理 */
+        p:first-letter {
+            font: 60px 黑体;   /* font这种就可以直接给多个字体的属性，以空格隔开 */
+            color: #7f55aa;
+        }
+        /* 二、第一行加红色下划线(这是动态的，无论第一行长度因为页面变化而变化，都只会加第一行) */
+        p:first-line {
+            text-decoration: underline red;
+        }
+        /* 三、在p标签内容前加内容 */
+        p:before{
+            content: "★";  /* content 就是加内容的key */
+            margin-right: 50px;  /* 这个 margin-right 就是加的内容距离原内容的距离 */
+        }
+        /* 四、在p标签之后加内容 */
+        p:after {
+            content: "这些加的内容是无法被选中的，可用鼠标去选中试试";
+            color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <p>伪元素好难顶哦，多来一点内容不他铺满伪元素好难顶哦！！</p>
+</body>
+</html>

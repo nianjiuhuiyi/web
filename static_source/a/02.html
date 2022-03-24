@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>伪类选择器</title>
+    <style>
+        /* 超链接伪类  */
+        a:link {   /* 这里的 :link 可以省去，其它的不能省  */
+            color: red;
+        }
+        a:hover {
+            color: orange;
+        }
+        a:visited {
+            color: black;
+        }
+        a:active {
+            color: blue;
+        }
+
+        /* 表单 :focus */
+        input:focus {
+            background-color: red;
+            outline: 5px solid #7e982e;   /* 输入框获得焦点时的框 */
+        }
+        /* 下面也是ul、li  */
+        ul li:first-child {
+            color: red;
+        }   /* li:first-child 和 li:last-child 是固定写法 */
+        ul li:last-child {
+            color: #7e982e;
+        }
+        ul li:nth-child(2) {  /* 这里要显示第几个就给数字几 */
+            color: orange;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="https://baidu.com/">这是一个超链接</a>
+    <input type="text">
+
+    <!-- 快速写法 ul>li{aaaa}*4  -->
+    <ul>
+        <li>aaaa</li>
+        <li>aaaa</li>
+        <li>aaaa</li>
+        <li>aaaa</li>
+    </ul>
+</body>
+</html>

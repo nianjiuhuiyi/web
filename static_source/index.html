@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--移动端开发设置-->
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">   <!--代表ie打开就是edge打开-->
+    <title>Document</title>
+</head>
+
+<body>
+    <!--1、div:用来布局的，没有具体含义，可以看做层-->
+    <div>
+        abc_hello_world
+        <div>这里面是可以嵌套的</div>
+    </div>
+
+    <!--2、hx:用于控制标题级别的，x只能是1~6,1级标题最大，6最小，会自动加粗，有默认字号-->
+    <h1>一、前端的学习</h1>
+    <h2>1.1、html入门</h2>
+    <h6>最后一级标题</h6>
+
+    <!--3、p:表示一个段落，相当于一个回车,里面一般放一段文字-->
+    <p>这里面放一大段文字，然后最后结尾p标签就相当于来了一个回车,进行分段</p>
+
+    <!--4、br:换行，一段文字想在某些地方换行就加这-->
+    <p>这里面放一大段文字，<br />然后最后结尾p标签就相当于来了一个回车</p>
+    <!--由于是单个的br，为了统一，建议写成<br /> 代表br开始及结束，虽然也可以是<br> -->
+    <!--标签属性：
+        1.通常由属性名="属性值"组成 （引号可以不要，但一般都是加上）
+        2.起附加信息的作用
+        3.不是所有标签都有属性，比如br标签-->
+    <p title="段落" class="content" id=可以是一样的>这是标签属性的测试</p>
+
+    <!--5、hr:生成一条水平线，主要起装饰作用，也是单标签-->
+    <hr />  <!--这就是一条单纯的线，可以在下面加属性-->
+    <hr width="20%" color="red" align="center" height="2px" />
+
+    <!--6、a:实现超链接跳转-->
+    <p>请点击<a href="https://baidu.com/" title="这里放提示文字,这会新开一页"  target="_blank">百度</a>这里</p>     <!--放www.baidu.com不行；一般是这样用，包裹在其它标签，就可以加文字的-->
+    <!--下面这就是把超链接的文字"白底"变成了一张图，中间是可以嵌套的-->
+	<a href="https://baidu.com/" title="百度，这不会新开一页"><img src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"></a>
+    <!--下面是文件的跳转，注意绝对路径和相对路径-->  <!--target中还有_parent和_top暂时用不到-->
+    <a href="01HTML文档结构.html" target="_blank">01文档001</a>  <!--这是新开一个网页-->
+    <a href="01HTML文档结构.html" target="_self">01文档002</a>   <!--这是在自身网页上打开-->
+    <!--不给target,默认就是用的_self，本身打开-->
+
+    <!--7、img:加载外部图片，参数：src:所需加载图像的路径；alt:图像加载不成功或是图像不存在时就是显示这个内容，否则不显示；title:鼠标放在图标上时的提示内容-->
+    <img src="https://img.alicdn.com/imgextra/i2/113880495/O1CN01qcg7wt1FWkiH6KxKj_!!0-saturn_solar.jpg_468x468q75.jpg_.webp" alt="图片" title="提示内容" />
+    <!--img也是单标签，记得用<img /> 这样来补全-->
+
+    <!--8、span:作用与div一样，都是用来布局，不同的是div会单独占一行，而span不会，span用于行内布局-->
+    <div>div1</div>
+    <div>div2</div>     <!--这俩就会有两行-->
+    <span>span1</span>
+    <span>span2</span>  <!--这俩就只有一行-->
+
+    <!--9、ul/ol:列表，前者是无序列表，后者是有序列表，他们的内容都用的是li标签
+       快捷写法是：先输入 ul>li{这里是内容$}*3  然后Tab，$会自动生成1、2、3，3代表3条内容
+	   如果是$$$，就会自动生成 001、002、003
+    -->
+    <ul>
+        <li>这是内容1</li>
+        <li>这是内容2</li>
+        <li>这是内容3</li>
+    </ul>
+
+    <ol>
+        <li>这是有序列表1</li>
+        <li>这是有序列表2</li>
+    </ol>
+
+    <!--10、q: 会自动把文本加上引号-->
+    <q>这会自动加引号</q>
+    <!--11、address: 专门用来写地址联系人这些，会有一些自己的格式-->
+  	<address>
+    	<p>电话：123456789</p>
+    	<p>住址：XXXXXXXXXX</p>
+ 	 </address>
+
+</body>
+
+</html>
