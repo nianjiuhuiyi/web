@@ -30,7 +30,7 @@ def application(env: dict, start_response):
             return "这个页面找不到了！ 404 Not Found！"
     else:
         try:
-            # 一定注意，这里./static_sources这个相对路径是相对的server.py，而不是dynamic.py
+            # 一定注意，这里./static_sources这个相对路径是相对的server.py(因为是从server.py启动的)，而不是dynamic.py
             fp = open(r"./static_sources" + file_name, "r")
         except Exception:
             response_body = "这个页面找不到了！ 404 Not Found！"

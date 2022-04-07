@@ -33,16 +33,17 @@ class MyServer:
             if file_name == "/":
                 file_name += "index.html"
 
+        # 按照WSGI的约定，这个env需要传递字典，方便后续扩展
         env = dict()
         env["file_name"] = file_name
-        # self._handel_header,传进来的参数，就决定header。用的变量是self.response_head
-        response_body = dynamic.application(env, self._handel_header)
+        # self._handle_header,传进来的参数，就决定header。用的变量是self.response_head
+        response_body = dynamic.application(env, self._handle_header)
 
         new_socket.send(self.response_head.encode("utf-8"))
         new_socket.send(response_body.encode("utf-8"))
         new_socket.close()
 
-    def _handel_header(self, header_status, header_args: (str, [(str, str), ])):
+    def _handle_header(self, header_status, header_args: (str, [(str, str), ])):
         """
         处理header的函数，通过传进来的函数把，self.response_head 处理成想要的
         """
