@@ -1,7 +1,8 @@
 import socket
 import re
 import threading
-from dynamic_sources import dynamic
+# from dynamic_sources import dynamic   # （方案一）这是直接写的if lese
+from dynamic_sources import dynamic_decorator  # （方案二）这是用的装饰器的路由
 
 
 class MyServer:
@@ -37,7 +38,8 @@ class MyServer:
         env = dict()
         env["file_name"] = file_name
         # self._handle_header,传进来的参数，就决定header。用的变量是self.response_head
-        response_body = dynamic.application(env, self._handle_header)
+        # response_body = dynamic.application(env, self._handle_header)  # （方案一）这是最简单的if else版本
+        response_body = dynamic_decorator.application(env, self._handle_header)   # （方案二）这是装饰器的路由版本
 
         new_socket.send(self.response_head.encode("utf-8"))
         new_socket.send(response_body.encode("utf-8"))
