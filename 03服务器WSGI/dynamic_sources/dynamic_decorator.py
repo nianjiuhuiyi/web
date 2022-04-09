@@ -1,4 +1,5 @@
 import time
+import pymysql
 
 now_time = time.ctime()
 
@@ -34,6 +35,68 @@ def logging():
 @route("/exiting.py")
 def exiting():
     return "这是注销页面！ {}".format(now_time)
+
+
+@route("/show.py")
+def show():
+    """
+    数据库数据查询的显示，更好的是把要查询的地方当参数传进来。
+    :return:
+    """
+    dbconnect = pymysql.connect(
+        host="192.168.2.125",
+        port=3306,
+        user="root",
+        passwd="123456",  # 除了port，密码这些一定要str
+        charset="utf8",
+        database="my_areas"
+    )
+    cursor = dbconnect.cursor()
+    # 这里的 "四川省" 可以换成其它的，也可以换成市,比如 “广安”
+    query_sql = "select * from areas as province inner join areas as city on province.district_id=city.pid " \
+                "having province.district_id=(select district_id from areas where district='成都');"
+
+    cursor.execute(query_sql)
+    datas = cursor.fetchall()
+    cursor.close()
+    dbconnect.close()
+
+    # 设置一个标头
+    contents = """
+        <tr>
+            <th>district_id</th>
+            <th>pid</th>
+            <th>district</th>
+            <th>level</th>
+            <th>%district_id(1)</th>
+            <th>%pid(1)</th>
+            <th>district(1)</th>
+            <th>level(1)</th>
+            <th>添加自选</th>
+        </tr>
+    """
+    # 这每行的内容
+    line = """
+        <tr>
+            <td>%s</td>
+            <td>%s</td>
+            <td>%s</td>
+            <td>%s</td>
+            <td>%s</td>
+            <td>%s</td>
+            <td>%s</td>
+            <td>%s</td>
+            <td>
+                <input type='button' value='添加'>
+            </td>
+        </tr>
+    """
+    for data in datas:
+        contents += line % (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7])
+
+    # 使其成为比表格
+    contents = "<table border='1' width='200' cellspacing='0' cellpadding='5' align='center'>" + contents + "<table/>"
+    return contents
 
 
 # application中不能再写那么多 if else，如果有很多函数，就会写很多，不好看
