@@ -48,10 +48,34 @@ logger.addHandler(fh)
 logger.addHandler(ch)
 
 # 日志
-logging.debug("这是 logging debug message")
-logging.info("这是 logging info message")
-logging.warning("这是 logging warning message")
-logging.error("这是 logging error message")
-logging.critical("这是 logging critical message")
+logger.debug("这是 logging debug message")
+logger.info("这是 logging info message")
+logger.warning("这是 logging warning message")
+logger.error("这是 logging error message")
+logger.critical("这是 logging critical message")
 
 # 这个是可以跨日志的
+
+
+"""-------配置文件用法------------"""
+import logging.config
+import yaml
+
+# 通过配置文件配置logging
+with open("./logging.conf.yaml", encoding="utf-8") as fp:
+    dic = yaml.load(fp, Loader=yaml.FullLoader)
+logging.config.dictConfig(dic)
+
+
+# 创建logger
+logger = logging.getLogger()
+
+# 输出日志
+logger.debug("这是 logging debug message")
+logger.info("这是 logging info message")
+logger.warning("这是 logging warning message")
+logger.error("这是 logging error message")
+logger.critical("这是 logging critical message")
+
+
+

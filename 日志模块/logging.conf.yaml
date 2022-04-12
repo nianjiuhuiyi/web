@@ -1,0 +1,56 @@
+version: 1
+# 这是设置格式，可以设置几种，不同的情况用不同的格式
+formatters:
+    simple:
+        format: " %(asctime)s - %(filename)s:[line:%(lineno)d] - %(levelname)s: %(message)s"
+        datefmt: "%Y-%m-%d %H:%M:%S"
+    upgrade:
+        format: " %(name)s: %(asctime)s - %(filename)s:[line:%(lineno)d] - %(levelname)s: %(message)s"
+
+# 这是控制log日志打印到屏幕、保存到磁盘文件
+handlers:
+    # 一样可以写不同场景的配置
+    console:
+        class: logging.StreamHandler   # 这就是代表输出到控制台
+        level: WARNING
+        formatter: upgrade           # 用的上面formatters中的哪种格式
+        stream: ext://sys.stdout
+    all_file_handler:
+        # 当日志文件的大小达到指定值的时候，RotatingFileHandler 会将日志文件重命名存档，然后打开一个新的日志文件
+        class: logging.handlers.RotatingFileHandler
+        level: DEBUG
+        formatter: simple    # 一样选择上面一种格式
+        filename: ./logs/all/all_log.log
+        maxBytes: 10485760   # 10MB(单个文件)
+        backupCount: 50      # 保留50个log文件
+        encoding: utf8
+    server_file_handler:
+        class: logging.handlers.RotatingFileHandler
+        level: INFO
+        formatter: upgrade
+        filename: ./logs/server/server.log     # 若是给了文件路径，一定要提前建立好，不然会报错
+        maxBytes: 10485760
+        backupCount: 20
+        encoding: utf8
+
+root:
+    level: INFO
+    handlers: [console, all_file_handler, server_file_handler]
+
+
+## 这是设置 my_logger = logging.getLogger("server")时传递的名字，
+#loggers:
+#    server:
+#        level: CRITICAL
+#        handlers: [console, server_file_handler]     # 这就是既可以打印又会保存日志文件
+#        propagate: True  # 设为false则禁止将日志消息传递给父级记录器的处理程序中
+#
+#    songhui:
+#        level: INFO
+#        handlers: [console, all_file_handler, server_file_handler]
+#        propagate: True
+
+# 如果设置了上面的 loggers，就不要再写下面的root了，然后实例化的时候也一定要传 "server" 或 "songhui",不然就没设置的格式了
+
+# 如果设置了root，就不要写上面的 loggers了，
+# 不然后面 my_logger = logging.getLogger("server")，那么就比如 logger.info("sss")就会按照server配置执行两遍(其中一遍3就是来自root)，
